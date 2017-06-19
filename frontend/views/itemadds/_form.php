@@ -10,9 +10,11 @@ use yii\widgets\ActiveForm;
 
 <div class="itemadds-form">
 
+	<?php $x = Yii::$app->user->identity->id ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'user_id')->dropDownList([$x => $x ]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
