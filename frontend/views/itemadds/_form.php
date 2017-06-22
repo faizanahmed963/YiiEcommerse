@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
 	<?php $x = Yii::$app->user->identity->id ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => [ 'type' => 'TYPE_HORIZONTAL','enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'user_id')->dropDownList([$x => $x ]) ?>
 
@@ -24,10 +24,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textarea(['rows' => 6]) ?>
-
+	<?= $form->field($model, 'imageFile')->fileInput() ?>
+	
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

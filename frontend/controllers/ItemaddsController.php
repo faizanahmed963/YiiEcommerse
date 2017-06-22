@@ -8,6 +8,7 @@ use app\models\ItemaddsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ItemaddsController implements the CRUD actions for Itemadds model.
@@ -65,8 +66,21 @@ class ItemaddsController extends Controller
     {
         $model = new Itemadds();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	if ($model->load(Yii::$app->request->post())) {
+
+			$name = $model->title;
+			$model->imageFile = UploadedFile::getInstance($model,'imageFile');
+			$model->imageFile->saveAs('itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension);
+			$model->image = 'itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension;
+			 
+			 if($model->save(false))
+                {
+					$lastInsertID = $model->getPrimaryKey();
+                   return $this->redirect(['view', 'id' => $lastInsertID]);
+                }
+			
+			return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

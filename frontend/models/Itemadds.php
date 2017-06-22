@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\base\model;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "itemadds".
@@ -17,6 +19,12 @@ use Yii;
  */
 class Itemadds extends \yii\db\ActiveRecord
 {
+	/**
+     * @var UploadedFile
+     */
+	 
+	public $imageFile;
+	
     /**
      * @inheritdoc
      */
@@ -36,6 +44,7 @@ class Itemadds extends \yii\db\ActiveRecord
             [['description', 'image'], 'string'],
             [['title'], 'string', 'max' => 100],
             [['tag'], 'string', 'max' => 200],
+			[['imageFile'], 'file','skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
