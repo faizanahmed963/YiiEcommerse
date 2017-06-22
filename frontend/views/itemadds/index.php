@@ -1,13 +1,17 @@
 <?php
 
+namespace app\models;
+
+use yii;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemaddsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Itemadds';
+$this->title = 'Item Adds';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="itemadds-index">
@@ -18,14 +22,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Itemadds', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+	
+	
+	<?php
+	
+	/* 
+		Set current userid.
+	*/
+	
+	$dataProvider = new ActiveDataProvider([
+        'query' => Itemadds::find()->where(['user_id'=>Yii::$app->user->identity->id]),
+		]);
+ 	?>
+	
+	
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'user_id',
+            //'id',
+			//'user_id',
             'title',
             'description:ntext',
             'price',
