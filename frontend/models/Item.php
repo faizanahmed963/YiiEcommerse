@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\base\model;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "item".
@@ -17,6 +19,8 @@ use Yii;
  */
 class Item extends \yii\db\ActiveRecord
 {
+	public $image;
+	
     /**
      * @inheritdoc
      */
@@ -36,6 +40,7 @@ class Item extends \yii\db\ActiveRecord
             [['item_description', 'item_image'], 'string'],
             [['item_title'], 'string', 'max' => 100],
             [['item_tags'], 'string', 'max' => 200],
+		//	[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -54,4 +59,15 @@ class Item extends \yii\db\ActiveRecord
             'item_image' => 'Item Image',
         ];
     }
+/*
+	public function upload()
+    {
+        if ($this->validate()) {
+            $this->image->saveAs('uploads/' . $this->image->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
+	*/
 }

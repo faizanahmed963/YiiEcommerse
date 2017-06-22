@@ -3,18 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\item;
-use app\models\itemSearch;
+use app\models\Test;
+use app\models\TestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-
 
 /**
- * ItemController implements the CRUD actions for item model.
+ * TestController implements the CRUD actions for Test model.
  */
-class ItemController extends Controller
+class TestController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class ItemController extends Controller
     }
 
     /**
-     * Lists all item models.
+     * Lists all Test models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new itemSearch();
+        $searchModel = new TestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a single item model.
+     * Displays a single Test model.
      * @param integer $id
      * @return mixed
      */
@@ -59,40 +57,17 @@ class ItemController extends Controller
     }
 
     /**
-     * Creates a new item model.
+     * Creates a new Test model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new item();
+        $model = new Test();
 
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) 
-	if(Yii::$app->request->post())
-	{
-			/*
-			//$name = $model->item_id;
-			$model->image = UploadedFile::getInstance($model,'image');
-			
-			if($model->upload())
-			{
-				echo success;
-			}
-			
-			//$model->image->saveAs('itemImages/'.$name.'.'.$model->image->extension);
-			
-			//$model->item_image = 'itemImages/'.$name.'.'.$model->image->extension;
-			*/
-			 $model->item_id = 23 ;
-            return $this->redirect(['view', 'id' => $model->item_id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-				/*	$model->image = UploadedFile::getInstance($model,'image');
-			
-			if($model->upload())
-			{
-				echo success;
-			}
-	*/
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -100,7 +75,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Updates an existing item model.
+     * Updates an existing Test model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,24 +84,9 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-  //      if ($model->load(Yii::$app->request->post()) && $model->save()) {
-		  if(Yii::$app->request->post()){
-  /*					$model->image = UploadedFile::getInstance($model,'image');
-			
-			if($model->upload())
-			{
-				echo success;
-			}
-	*/
-            return $this->redirect(['view', 'id' => $model->item_id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-		/*			$model->image = UploadedFile::getInstance($model,'image');
-			
-			if($model->upload())
-			{
-				echo success;
-			}
-	*/
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -134,7 +94,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Deletes an existing item model.
+     * Deletes an existing Test model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -147,15 +107,15 @@ class ItemController extends Controller
     }
 
     /**
-     * Finds the item model based on its primary key value.
+     * Finds the Test model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return item the loaded model
+     * @return Test the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = item::findOne($id)) !== null) {
+        if (($model = Test::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
