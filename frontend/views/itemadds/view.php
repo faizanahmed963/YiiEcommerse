@@ -40,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?php
        if ($model->image!='') {
-         echo '<br /><p><img src=$model->image></p>';
+         //echo '<br /><p><img src=$model->image></p>';
+		 echo Html::img('@web/'.$model->image, ['height'=>'150', 'width'=>'150']);
        }     
     ?>
 </div>

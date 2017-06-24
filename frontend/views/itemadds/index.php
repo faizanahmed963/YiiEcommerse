@@ -48,7 +48,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'price',
             'tag',
-            'image:ntext',
+            //'image:ntext',
+			 array(
+				'attribute' => 'image',
+				'format' => 'html',
+				'value'=>function($data) { $url = $data->imageurl; 
+											return Html::img($url, ['height'=>'50', 'width'=>'50']);
+										},
+					),
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -63,4 +63,10 @@ class Itemadds extends \yii\db\ActiveRecord
             'image' => 'Image',
         ];
     }
+	
+	public function getImageurl()
+		{
+			//return \Yii::$app->request->BaseUrl.'/<path to image>/'.$this->logo;
+			return '@web/'.$this->image;
+		}
 }
