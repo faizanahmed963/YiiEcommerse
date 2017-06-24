@@ -69,7 +69,7 @@ class ItemaddsController extends Controller
         //if ($model->load(Yii::$app->request->post()) && $model->save()) {
 	if ($model->load(Yii::$app->request->post())) {
 
-			$name = $model->title;
+			$name = $model->id;
 			$model->imageFile = UploadedFile::getInstance($model,'imageFile');
 			$model->imageFile->saveAs('itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension);
 			$model->image = 'itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension;
@@ -98,8 +98,20 @@ class ItemaddsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        	if ($model->load(Yii::$app->request->post())) {
+
+			$name = $model->id;
+			$model->imageFile = UploadedFile::getInstance($model,'imageFile');
+			$model->imageFile->saveAs('itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension);
+			$model->image = 'itemImages/'.$model->imageFile->baseName.$name.'.'.$model->imageFile->extension;
+			 
+			 if($model->save(false))
+                {
+					$lastInsertID = $model->getPrimaryKey();
+                   return $this->redirect(['view', 'id' => $lastInsertID]);
+                }
+			
+			return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
