@@ -6,11 +6,21 @@ use yii;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemaddsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+?>
 
+<?php
+	if(Yii::$app->user->isGuest)
+	{
+		throw new NotFoundHttpException('Hmm! Naughty people.'); 
+	}
+?>
+
+<?php
 $this->title = 'Item Adds';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
