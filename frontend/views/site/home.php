@@ -20,7 +20,7 @@ use yii\widgets\DetailView;
                         <div class="thumbnail">
 						
                             <!-- <img src="http://placehold.it/320x150" alt=""> -->
-							<?php echo Html::img('@web/'.$item['image'], ['height'=>'100', 'width'=>'320']); ?>
+							<?php echo Html::img('@web/'.$item['image'],"" , ['height'=>'100', 'width'=>'320']); ?>
 							
                             <div class="caption">
 							
